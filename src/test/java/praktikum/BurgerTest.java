@@ -19,22 +19,24 @@ public class BurgerTest {
     private final String nameIngredient = "Горчица";
     private final float priceIngredient = 10.1f;
     Burger burger;
+    Bun bun;
 
     @Mock
-    Bun bun;
+
     Ingredient firstIngredient = mock(Ingredient.class);
     Ingredient secondIngredient = mock(Ingredient.class);
 
     @Before
-    public void setUp (){
+    public void setUp () {
         burger = new Burger();
+        bun = new Bun("CosmoBread", 23.5f);
     }
 
     @Test
     public void checkSetBuns() {
         burger.setBuns(bun);
-        Mockito.when(bun.getName()).thenReturn(nameBun);
-        String actual = bun.getName();
+        //Mockito.when(bun.getName()).thenReturn(nameBun);
+        String actual = bun.setName("Ржаная булочка");
         assertEquals("Возвращается неверное название булочки", nameBun, actual);
     }
 
@@ -62,16 +64,16 @@ public class BurgerTest {
     @Test
     public void getPriceBunTest() {
         burger.setBuns(bun);
-        Mockito.when(bun.getPrice()).thenReturn(20f);
-        float actual = bun.getPrice();
+        //Mockito.when(bun.getPrice()).thenReturn(20f);
+        float actual = bun.setPrice(20f);
         assertEquals("Цена булочки некорректна", 20f, actual, 0);
     }
 
     @Test
     public void getReceiptTest() {
         burger.setBuns(bun);
-        Mockito.when(bun.getName()).thenReturn(nameBun);
-        Mockito.when(bun.getPrice()).thenReturn(priceBun);
+        //Mockito.when(bun.getName()).thenReturn(nameBun);
+        //Mockito.when(bun.getPrice()).thenReturn(priceBun);
 
         Mockito.when(firstIngredient.getType()).thenReturn(IngredientType.SAUCE);
         Mockito.when(firstIngredient.getName()).thenReturn(nameIngredient);
@@ -80,10 +82,10 @@ public class BurgerTest {
         burger.addIngredient(firstIngredient);
 
         String expected =
-                String.format("(==== %s ====)%n", nameBun) +
+                String.format("(==== %s ====)%n", bun.setName("CosmoBread")) +
                         String.format("= %s %s =%n", firstIngredient.getType().toString().toLowerCase(), nameIngredient) +
-                        String.format("(==== %s ====)%n", nameBun) +
-                        String.format("%nPrice: %f%n", (priceBun * 2 + priceIngredient));
+                        String.format("(==== %s ====)%n", bun.setName("CosmoBread")) +
+                        String.format("%nPrice: %f%n", (bun.setPrice(23.5f) * 2 + priceIngredient));
 
         assertEquals("Чек неккоректен", expected, burger.getReceipt());
 
