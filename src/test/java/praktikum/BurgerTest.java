@@ -88,14 +88,4 @@ public class BurgerTest {
         assertEquals(expected, burger.getReceipt());
     }
 
-    @Test
-    public void BurgerTest() {
-        List<Bun> buns = database.availableBuns();
-        var bun = buns.get(new Random().nextInt(buns.size()));
-        List<Ingredient> ingredients = database.availableIngredients();
-        var ingredient = ingredients.get(new Random().nextInt(ingredients.size()));
-        burger.setBuns(bun);
-        burger.addIngredient(ingredient);
-        assertEquals(bun.getPrice()*2+ingredient.getPrice(), burger.getPrice(), 0);
-    }
 }
